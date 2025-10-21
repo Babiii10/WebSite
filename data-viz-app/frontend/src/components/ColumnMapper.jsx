@@ -215,11 +215,11 @@ const ColumnMapper = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
               >
                 <option value="">Sélectionner une colonne...</option>
-                {chartRequirements.yAxis.type === 'number' ? numericColumns : columns}.map(col => (
+                {(chartRequirements.yAxis.type === 'number' ? numericColumns : columns).map(col => (
                   <option key={col} value={col}>
                     {col} ({dataTypes[col]})
                   </option>
-                ))
+                ))}
               </select>
             </div>
           )}

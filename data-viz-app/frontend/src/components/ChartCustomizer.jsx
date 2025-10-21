@@ -1,7 +1,6 @@
 import { FiSettings, FiDownload, FiSave } from 'react-icons/fi'
 import useStore from '../store/useStore'
 import { exportToCSV } from '../utils/dataProcessor'
-import Plotly from 'plotly.js-dist'
 
 const COLOR_SCHEMES = [
   'Viridis', 'Blues', 'Greens', 'Reds', 'Portland', 'Jet', 'Hot',
@@ -17,24 +16,31 @@ const ChartCustomizer = ({ plotRef }) => {
   } = useStore()
 
   const handleExportPNG = () => {
-    if (plotRef?.current?.el) {
-      Plotly.downloadImage(plotRef.current.el, {
-        format: 'png',
-        width: 1920,
-        height: 1080,
-        filename: chartOptions.title || 'chart'
-      })
+    if (plotRef?.current) {
+      // Use the built-in Plotly export feature via the plot reference
+      const gd = plotRef.current.el || plotRef.current
+      if (gd && window.Plotly) {
+        window.Plotly.downloadImage(gd, {
+          format: 'png',
+          width: 1920,
+          height: 1080,
+          filename: chartOptions.title || 'chart'
+        })
+      }
     }
   }
 
   const handleExportSVG = () => {
-    if (plotRef?.current?.el) {
-      Plotly.downloadImage(plotRef.current.el, {
-        format: 'svg',
-        width: 1920,
-        height: 1080,
-        filename: chartOptions.title || 'chart'
-      })
+    if (plotRef?.current) {
+      const gd = plotRef.current.el || plotRef.current
+      if (gd && window.Plotly) {
+        window.Plotly.downloadImage(gd, {
+          format: 'svg',
+          width: 1920,
+          height: 1080,
+          filename: chartOptions.title || 'chart'
+        })
+      }
     }
   }
 

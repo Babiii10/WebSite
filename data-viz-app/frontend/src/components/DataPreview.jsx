@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react'
 import { FiTrash2, FiFilter, FiCheck, FiX, FiPlus } from 'react-icons/fi'
 import useStore from '../store/useStore'
-import { processData, getColumnStats, getUniqueValues, convertColumnType } from '../utils/dataProcessor'
+import { processData, getColumnStats, getUniqueValues } from '../utils/dataProcessor'
+import { convertColumnType } from '../utils/fileParser'
 
 const DataPreview = () => {
   const {
